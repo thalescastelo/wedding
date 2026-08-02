@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thales &amp; Beatriz — 29 de Maio de 2027</title>
+<meta name="description" content="Casamento de Thales & Beatriz — 29 de maio de 2027, Paróquia Nossa Senhora da Conceição, Jundiaí - SP">
+<link rel="icon" href="img/logo.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#23386f;
+    --navy-dark:#1a2a55;
+    --cream:#faf5ea;
+    --cream-dark:#f3ecdc;
+    --terracotta:#c8501f;
+    --olive:#6d7a2e;
+    --mustard:#c9971d;
+    --rose:#c9647a;
+    --hortensia:#5b87c7;
+    --ink:#2c2c2c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Cormorant Garamond',serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+  }
+  h1,h2,h3{font-weight:600;color:var(--navy)}
+  img{max-width:100%;display:block}
+
+  /* ---------- decorative azulejo band ---------- */
+  .azulejo{
+    height:26px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Crect width='26' height='26' fill='%23faf5ea'/%3E%3Cg fill='none' stroke='%2323386f' stroke-width='1.1'%3E%3Cpath d='M13 2 L24 13 L13 24 L2 13 Z'/%3E%3Ccircle cx='13' cy='13' r='3.5'/%3E%3C/g%3E%3Ccircle cx='13' cy='13' r='1.4' fill='%23c8501f'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;
+    background-position:center;
+    opacity:.85;
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(250,245,234,.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(35,56,111,.15);
+    display:flex;justify-content:center;gap:clamp(12px,3vw,38px);
+    padding:14px 16px;flex-wrap:wrap;
+  }
+  nav a{
+    font-family:'Montserrat',sans-serif;
+    font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--navy);text-decoration:none;
+    transition:color .25s;
+  }
+  nav a:hover{color:var(--terracotta)}
+
+  /* ---------- hero ---------- */
+  header{
+    min-height:100svh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;
+    padding:110px 20px 60px;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(91,135,199,.10), transparent 45%),
+      radial-gradient(ellipse at 85% 75%, rgba(201,100,122,.09), transparent 45%),
+      radial-gradient(ellipse at 80% 15%, rgba(201,151,29,.08), transparent 40%),
+      var(--cream);
+    position:relative;
+  }
+  .hero-logo{
+    width:min(320px,70vw);
+    border-radius:50%;
+    box-shadow:0 12px 45px rgba(35,56,111,.18);
+    margin-bottom:34px;
+  }
+  .hero-kicker{
+    font-family:'Montserrat',sans-serif;
+    font-size:12px;letter-spacing:5px;text-transform:uppercase;
+    color:var(--terracotta);margin-bottom:14px;
+  }
+  header h1{
+    font-family:'Great Vibes',cursive;
+    font-weight:400;
+    font-size:clamp(3rem,9vw,5.2rem);
+    color:var(--navy);
+    line-height:1.15;
+  }
+  .hero-date{
+    font-size:clamp(1.15rem,3vw,1.5rem);
+    letter-spacing:4px;
+    color:var(--ink);
+    margin-top:10px;
+  }
+  .hero-place{
+    font-style:italic;color:var(--olive);
+    font-size:1.1rem;margin-top:6px;
+  }
+  .hero-rule{
+    width:90px;height:1px;background:var(--mustard);
+    margin:26px auto 0;position:relative;
+  }
+  .hero-rule::after{
+    content:"❦";position:absolute;left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    background:var(--cream);padding:0 10px;
+    color:var(--mustard);font-size:15px;
+  }
+
+  /* ---------- countdown ---------- */
+  .countdown{
+    display:flex;gap:clamp(10px,3vw,26px);
+    margin-top:38px;flex-wrap:wrap;justify-content:center;
+  }
+  .count-box{
+    background:#fff;
+    border:1px solid rgba(35,56,111,.18);
+    border-radius:10px;
+    box-shadow:0 6px 20px rgba(35,56,111,.08);
+    width:clamp(72px,18vw,104px);
+    padding:16px 6px 12px;
+  }
+  .count-box b{
+    display:block;font-size:clamp(1.7rem,5vw,2.5rem);
+    color:var(--navy);font-weight:700;line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .count-box span{
+    font-family:'Montserrat',sans-serif;
+    font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--terracotta);
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(60px,9vw,100px) 20px}
+  .wrap{max-width:1050px;margin:0 auto}
+  .sec-kicker{
+    font-family:'Montserrat',sans-serif;
+    text-align:center;font-size:11px;letter-spacing:4px;
+    text-transform:uppercase;color:var(--terracotta);margin-bottom:10px;
+  }
+  .sec-title{
+    text-align:center;
+    font-family:'Great Vibes',cursive;font-weight:400;
+    font-size:clamp(2.4rem,6vw,3.4rem);
+    margin-bottom:14px;
+  }
+  .sec-sub{
+    text-align:center;max-width:640px;margin:0 auto 46px;
+    font-size:1.15rem;font-style:italic;color:#555;
+  }
+
+  /* ---------- gallery ---------- */
+  #galeria,#recepcao{background:var(--cream-dark)}
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+  }
+  .gallery figure{
+    position:relative;overflow:hidden;border-radius:8px;
+    box-shadow:0 8px 24px rgba(35,56,111,.14);
+    background:#fff;padding:10px 10px 14px;
+  }
+  .gallery img{
+    width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;
+    transition:transform .5s ease;
+  }
+  .gallery figure:hover img{transform:scale(1.04)}
+  .gallery figure:nth-child(odd){transform:rotate(-1.2deg)}
+  .gallery figure:nth-child(even){transform:rotate(1.2deg)}
+
+  /* ---------- ceremony ---------- */
+  .ceremony-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
+  }
+  @media(max-width:800px){
+    .ceremony-grid{grid-template-columns:1fr}
+    .ceremony-grid.reverse .ceremony-card{order:-1}
+  }
+  .ceremony-card{
+    background:#fff;border-radius:12px;
+    border-top:5px solid var(--navy);
+    box-shadow:0 8px 28px rgba(35,56,111,.12);
+    padding:38px 34px;text-align:center;
+  }
+  .ceremony-card.festive{border-top-color:var(--terracotta)}
+  .ceremony-card.festive .hour{color:var(--olive)}
+  .ceremony-card h3{font-size:1.8rem;margin-bottom:6px}
+  .ceremony-card .addr{color:#555;font-size:1.1rem;margin:12px 0 4px}
+  .ceremony-card .hour{
+    font-size:2.1rem;color:var(--terracotta);font-weight:700;margin-top:10px;
+  }
+  .btn{
+    display:inline-block;margin-top:22px;
+    font-family:'Montserrat',sans-serif;
+    font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+    color:#fff;background:var(--navy);
+    padding:14px 30px;border-radius:40px;
+    text-decoration:none;border:none;cursor:pointer;
+    transition:background .3s,transform .2s;
+  }
+  .btn:hover{background:var(--terracotta);transform:translateY(-2px)}
+  .map-frame{
+    border-radius:12px;overflow:hidden;
+    box-shadow:0 8px 28px rgba(35,56,111,.12);
+    border:1px solid rgba(35,56,111,.15);
+    height:380px;
+  }
+  .map-frame iframe{width:100%;height:100%;border:0}
+
+  /* ---------- gifts ---------- */
+  #presentes{background:var(--navy)}
+  #presentes .sec-kicker{color:var(--mustard)}
+  #presentes .sec-title{color:var(--cream)}
+  #presentes .sec-sub{color:rgba(250,245,234,.85)}
+  .gifts{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:18px;max-width:1050px;margin:0 auto;
+  }
+  .gift-card{
+    background:var(--cream);border-radius:12px;
+    text-align:center;padding:30px 18px 26px;
+    box-shadow:0 8px 24px rgba(0,0,0,.22);
+    transition:transform .25s;
+  }
+  .gift-card:hover{transform:translateY(-5px)}
+  .gift-card .gift-ico{font-size:1.6rem;margin-bottom:6px}
+  .gift-card h4{
+    font-family:'Montserrat',sans-serif;font-weight:500;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--olive);margin-bottom:8px;
+  }
+  .gift-card .price{
+    font-size:2rem;font-weight:700;color:var(--navy);margin-bottom:14px;
+  }
+  .gift-card .price small{font-size:1.05rem;font-weight:500}
+  .gift-btn{
+    font-family:'Montserrat',sans-serif;
+    font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    background:var(--terracotta);color:#fff;border:none;
+    padding:11px 22px;border-radius:30px;cursor:pointer;
+    transition:background .3s;
+  }
+  .gift-btn:hover{background:var(--mustard)}
+
+  /* ---------- pix modal ---------- */
+  .modal-bg{
+    position:fixed;inset:0;background:rgba(26,42,85,.72);
+    display:none;align-items:center;justify-content:center;
+    z-index:200;padding:20px;
+  }
+  .modal-bg.open{display:flex}
+  .modal{
+    background:var(--cream);border-radius:16px;
+    max-width:400px;width:100%;text-align:center;
+    padding:40px 32px 34px;position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+  }
+  .modal-close{
+    position:absolute;top:12px;right:18px;
+    background:none;border:none;font-size:26px;color:var(--navy);
+    cursor:pointer;line-height:1;
+  }
+  .modal h3{font-size:1.9rem;margin-bottom:4px}
+  .modal .modal-value{
+    font-size:1.4rem;color:var(--terracotta);font-weight:700;margin-bottom:16px;
+  }
+  .modal img{
+    width:230px;margin:0 auto 16px;border-radius:10px;
+    border:6px solid #fff;box-shadow:0 6px 20px rgba(35,56,111,.18);
+  }
+  .modal p{font-size:1.05rem;font-style:italic;color:#555}
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--navy-dark);color:rgba(250,245,234,.9);
+    text-align:center;padding:52px 20px 40px;
+  }
+  footer .foot-names{
+    font-family:'Great Vibes',cursive;font-size:2.4rem;color:var(--cream);
+  }
+  footer .foot-date{
+    font-family:'Montserrat',sans-serif;font-size:11px;
+    letter-spacing:4px;margin-top:8px;color:var(--mustard);
+  }
+  footer .foot-msg{font-style:italic;margin-top:18px;font-size:1.05rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#inicio">Início</a>
+  <a href="#galeria">Nossa História</a>
+  <a href="#cerimonia">Cerimônia</a>
+  <a href="#recepcao">Recepção</a>
+  <a href="#presentes">Presentes</a>
+</nav>
+
+<header id="inicio">
+  <img class="hero-logo" src="img/logo.jpeg" alt="Monograma Thales & Beatriz">
+  <p class="hero-kicker">Vamos nos casar!</p>
+  <h1>Thales &amp; Beatriz</h1>
+  <p class="hero-date">29 · 05 · 2027 — 11h</p>
+  <p class="hero-place">Paróquia Nossa Senhora da Conceição · Jundiaí, SP</p>
+  <div class="hero-rule"></div>
+  <div class="countdown" id="countdown" aria-live="polite">
+    <div class="count-box"><b id="cd-dias">–</b><span>Dias</span></div>
+    <div class="count-box"><b id="cd-horas">–</b><span>Horas</span></div>
+    <div class="count-box"><b id="cd-min">–</b><span>Minutos</span></div>
+    <div class="count-box"><b id="cd-seg">–</b><span>Segundos</span></div>
+  </div>
+</header>
+
+<div class="azulejo"></div>
+
+<section id="galeria">
+  <div class="wrap">
+    <p class="sec-kicker">Um pouco de nós</p>
+    <h2 class="sec-title">Nossa História</h2>
+    <p class="sec-sub">Alguns momentos do nosso caminho até aqui — e a alegria de poder celebrar o próximo capítulo com quem amamos.</p>
+    <div class="gallery">
+      <figure><img src="img/foto1.jpg" alt="Thales e Beatriz — foto 1" loading="lazy"></figure>
+      <figure><img src="img/foto2.jpg" alt="Thales e Beatriz — foto 2" loading="lazy"></figure>
+      <figure><img src="img/foto3.jpg" alt="Thales e Beatriz — foto 3" loading="lazy"></figure>
+      <figure><img src="img/foto4.jpg" alt="Thales e Beatriz — foto 4" loading="lazy"></figure>
+      <figure><img src="img/foto5.jpg" alt="Thales e Beatriz — foto 5" loading="lazy"></figure>
+      <figure><img src="img/foto6.jpg" alt="Thales e Beatriz — foto 6" loading="lazy"></figure>
+      <figure><img src="img/foto7.jpg" alt="Thales e Beatriz — foto 7" loading="lazy"></figure>
+      <figure><img src="img/foto8.jpg" alt="Thales e Beatriz — foto 8" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<div class="azulejo"></div>
+
+<section id="cerimonia">
+  <div class="wrap">
+    <p class="sec-kicker">Com a bênção de Deus</p>
+    <h2 class="sec-title">Cerimônia Religiosa</h2>
+    <p class="sec-sub">Será uma honra receber você para celebrar conosco o sacramento do matrimônio.</p>
+    <div class="ceremony-grid">
+      <div class="ceremony-card">
+        <div style="font-size:1.8rem;color:var(--mustard)">⛪</div>
+        <h3>Paróquia Nossa Senhora da Conceição</h3>
+        <p class="addr">R. Gen. Carneiro, 106 — Vila Arens II<br>Jundiaí — SP, 13202-590</p>
+        <p class="hour">Sábado, 29 de maio de 2027 · 11h</p>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia+Nossa+Senhora+da+Concei%C3%A7%C3%A3o%2C+R.+Gen.+Carneiro%2C+106+-+Vila+Arens+II%2C+Jundia%C3%AD+-+SP%2C+13202-590" target="_blank" rel="noopener">Como chegar</a>
+      </div>
+      <div class="map-frame">
+        <iframe
+          title="Mapa — Paróquia Nossa Senhora da Conceição, Jundiaí"
+          src="https://www.google.com/maps?q=Par%C3%B3quia+Nossa+Senhora+da+Concei%C3%A7%C3%A3o%2C+R.+Gen.+Carneiro%2C+106+-+Vila+Arens+II%2C+Jundia%C3%AD+-+SP%2C+13202-590&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="azulejo"></div>
+
+<section id="recepcao">
+  <div class="wrap">
+    <p class="sec-kicker">Vamos comemorar</p>
+    <h2 class="sec-title">Recepção Festiva</h2>
+    <p class="sec-sub">Logo após a cerimônia religiosa, seguiremos juntos para a festa — com muita comida, música e alegria para celebrar esse dia com você.</p>
+    <div class="ceremony-grid reverse">
+      <div class="map-frame">
+        <iframe
+          title="Mapa — Recanto das Palmeiras, Jundiaí"
+          src="https://www.google.com/maps?q=Recanto+das+Palmeiras%2C+Rua+Miguel+Munhoz%2C+100+-+Caxambu%2C+Jundia%C3%AD+-+SP%2C+13218-651&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <div class="ceremony-card festive">
+        <div style="font-size:1.8rem;color:var(--mustard)">🥂</div>
+        <h3>Recanto das Palmeiras</h3>
+        <p class="addr">Rua Miguel Munhoz, 100 — Caxambu<br>Jardim Molinari, Jundiaí — SP, 13218-651</p>
+        <p class="hour">Logo após a cerimônia</p>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Recanto+das+Palmeiras%2C+Rua+Miguel+Munhoz%2C+100+-+Caxambu%2C+Jundia%C3%AD+-+SP%2C+13218-651" target="_blank" rel="noopener">Como chegar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="azulejo"></div>
+
+<section id="presentes">
+  <div class="wrap">
+    <p class="sec-kicker">Lista de Presentes</p>
+    <h2 class="sec-title">Presenteie os Noivos</h2>
+    <p class="sec-sub">Sua presença é o nosso maior presente! Mas, se quiser nos mimar, fique à vontade para escolher o valor que couber no seu coração — qualquer contribuição será recebida com muito carinho. 💙</p>
+    <div class="gifts" id="gifts"></div>
+  </div>
+</section>
+
+<div class="modal-bg" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Fechar">×</button>
+    <h3 id="modal-title">Obrigado! 💙</h3>
+    <p class="modal-value" id="modal-value"></p>
+    <img src="img/qrcode.jpeg" alt="QR Code Pix dos noivos">
+    <p>Escaneie o QR Code acima com o aplicativo do seu banco para fazer o Pix.<br>Muito obrigado pelo carinho!</p>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-names">Thales &amp; Beatriz</div>
+  <div class="foot-date">29 · 05 · 2027 — JUNDIAÍ · SP</div>
+  <p class="foot-msg">"Acima de tudo, revistam-se do amor, que é o elo perfeito." — Colossenses 3:14</p>
+</footer>
+
+<script>
+  // ---------- contagem regressiva ----------
+  const alvo = new Date("2027-05-29T11:00:00-03:00").getTime();
+  const pad = n => String(n).padStart(2, "0");
+  function tick(){
+    const diff = alvo - Date.now();
+    if(diff <= 0){
+      document.getElementById("countdown").innerHTML =
+        '<p style="font-size:1.6rem;font-style:italic;color:var(--terracotta)">É hoje! Nos vemos no altar! 💍</p>';
+      clearInterval(timer);
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor(diff / 3600000) % 24;
+    const m = Math.floor(diff / 60000) % 60;
+    const s = Math.floor(diff / 1000) % 60;
+    document.getElementById("cd-dias").textContent = d;
+    document.getElementById("cd-horas").textContent = pad(h);
+    document.getElementById("cd-min").textContent = pad(m);
+    document.getElementById("cd-seg").textContent = pad(s);
+  }
+  const timer = setInterval(tick, 1000);
+  tick();
+
+  // ---------- lista de presentes ----------
+  const nomes = [
+    ["🍷","Um brinde aos noivos"],
+    ["🫒","Azeite da lua de mel"],
+    ["🍝","Jantar mediterrâneo"],
+    ["🏺","Cerâmica portuguesa"],
+    ["🌊","Um dia na costa"],
+    ["💐","Buquê da noiva"],
+    ["🕊️","Bênção aos noivos"],
+    ["🍽️","Jantar de lua de mel"],
+    ["🍰","Fatia do bolo"],
+    ["🎻","Música da cerimônia"],
+    ["✈️","Rumo à lua de mel"],
+    ["🏛️","Sonho mediterrâneo"],
+    ["👑","Presente dos reis"],
+    ["🌅","Pôr do sol no Mediterrâneo"],
+    ["⛵","Veleiro dos noivos"]
+  ];
+  const giftsEl = document.getElementById("gifts");
+  let idx = 0;
+  for(let valor = 100; valor <= 800; valor += 50){
+    const [ico, nome] = nomes[idx++ % nomes.length];
+    const card = document.createElement("div");
+    card.className = "gift-card";
+    card.innerHTML = `
+      <div class="gift-ico">${ico}</div>
+      <h4>${nome}</h4>
+      <div class="price"><small>R$</small> ${valor}</div>
+      <button class="gift-btn" data-valor="${valor}">Presentear</button>`;
+    giftsEl.appendChild(card);
+  }
+
+  // ---------- modal pix ----------
+  const modal = document.getElementById("modal");
+  giftsEl.addEventListener("click", e => {
+    const btn = e.target.closest(".gift-btn");
+    if(!btn) return;
+    document.getElementById("modal-value").textContent =
+      "Pix de R$ " + btn.dataset.valor + ",00";
+    modal.classList.add("open");
+  });
+  document.getElementById("modal-close").addEventListener("click", () => modal.classList.remove("open"));
+  modal.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("open"); });
+  document.addEventListener("keydown", e => { if(e.key === "Escape") modal.classList.remove("open"); });
+</script>
+</body>
+</html>
