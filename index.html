@@ -101,15 +101,13 @@
     font-size:1.1rem;margin-top:6px;
   }
   .hero-rule{
-    width:90px;height:1px;background:var(--mustard);
-    margin:26px auto 0;position:relative;
+    display:flex;align-items:center;justify-content:center;
+    gap:12px;margin:26px auto 0;
   }
-  .hero-rule::after{
-    content:"❦";position:absolute;left:50%;top:50%;
-    transform:translate(-50%,-50%);
-    background:var(--cream);padding:0 10px;
-    color:var(--mustard);font-size:15px;
+  .hero-rule::before,.hero-rule::after{
+    content:"";height:1px;background:var(--mustard);width:40px;
   }
+  .hero-rule span{color:var(--mustard);font-size:15px;line-height:1}
 
   /* ---------- countdown ---------- */
   .countdown{
@@ -133,6 +131,50 @@
     font-family:'Montserrat',sans-serif;
     font-size:10px;letter-spacing:2px;text-transform:uppercase;
     color:var(--terracotta);
+  }
+
+  .hero-note{
+    max-width:520px;margin:30px auto 0;
+    background:rgba(255,255,255,.7);
+    border:1px solid rgba(35,56,111,.2);
+    border-radius:10px;padding:16px 22px;
+    font-size:1.05rem;color:var(--navy);
+  }
+  .hero-note b{color:var(--terracotta)}
+
+  /* ---------- info / dress code ---------- */
+  .info-box{
+    margin-top:38px;background:#fff;
+    border-left:5px solid var(--mustard);
+    border-radius:10px;padding:30px 34px;
+    box-shadow:0 8px 24px rgba(35,56,111,.10);
+  }
+  .info-box h3{
+    font-size:1.5rem;margin-bottom:4px;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .info-box .info-label{
+    font-family:'Montserrat',sans-serif;
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--terracotta);display:block;margin-bottom:10px;
+  }
+  .info-box p{font-size:1.12rem;margin-top:8px;color:#444}
+  .dress-list{
+    list-style:none;margin:12px 0 4px;padding:0;
+  }
+  .dress-list li{
+    position:relative;padding-left:26px;
+    font-size:1.12rem;color:#444;margin-bottom:8px;
+  }
+  .dress-list li::before{
+    content:"❦";position:absolute;left:0;top:0;
+    color:var(--olive);font-size:.95rem;
+  }
+  .dress-list strong{color:var(--navy)}
+  .info-box .alert{
+    margin-top:14px;padding:14px 18px;
+    background:rgba(201,151,29,.10);
+    border-radius:8px;color:var(--navy);
   }
 
   /* ---------- sections ---------- */
@@ -276,6 +318,17 @@
     border:6px solid #fff;box-shadow:0 6px 20px rgba(35,56,111,.18);
   }
   .modal p{font-size:1.05rem;font-style:italic;color:#555}
+  .modal-zap{
+    margin-top:14px;padding:12px 14px;
+    background:rgba(109,122,46,.10);border-radius:8px;
+    font-style:normal !important;
+  }
+  .modal-zap a{
+    color:var(--olive);font-weight:700;font-size:1.2rem;
+    text-decoration:none;letter-spacing:.5px;
+  }
+  .modal-zap a:hover{text-decoration:underline}
+  .modal-bless{margin-top:14px;color:var(--navy) !important}
 
   /* ---------- footer ---------- */
   footer{
@@ -308,13 +361,14 @@
   <h1>Thales &amp; Beatriz</h1>
   <p class="hero-date">29 · 05 · 2027 — 11h</p>
   <p class="hero-place">Paróquia Nossa Senhora da Conceição · Jundiaí, SP</p>
-  <div class="hero-rule"></div>
+  <div class="hero-rule"><span>❦</span></div>
   <div class="countdown" id="countdown" aria-live="polite">
     <div class="count-box"><b id="cd-dias">–</b><span>Dias</span></div>
     <div class="count-box"><b id="cd-horas">–</b><span>Horas</span></div>
     <div class="count-box"><b id="cd-min">–</b><span>Minutos</span></div>
     <div class="count-box"><b id="cd-seg">–</b><span>Segundos</span></div>
   </div>
+  <p class="hero-note"><b>Fique atento à confirmação de presença!</b><br>O Grupo Conti entrará em contato com você pelo WhatsApp.</p>
 </header>
 
 <div class="azulejo"></div>
@@ -343,7 +397,7 @@
   <div class="wrap">
     <p class="sec-kicker">Com a bênção de Deus</p>
     <h2 class="sec-title">Cerimônia Religiosa</h2>
-    <p class="sec-sub">Será uma honra receber você para celebrar conosco o sacramento do matrimônio.</p>
+    <p class="sec-sub">Será uma imensa alegria celebrar nossa união com vocês! Nossa cerimônia incluirá a celebração da Santa Missa. Aos convidados católicos que desejarem comungar, lembramos fraternalmente a importância de estarem preparados para o momento mais especial, a Eucaristia.</p>
     <div class="ceremony-grid">
       <div class="ceremony-card">
         <div style="font-size:1.8rem;color:var(--mustard)">⛪</div>
@@ -358,6 +412,18 @@
           src="https://www.google.com/maps?q=Par%C3%B3quia+Nossa+Senhora+da+Concei%C3%A7%C3%A3o%2C+R.+Gen.+Carneiro%2C+106+-+Vila+Arens+II%2C+Jundia%C3%AD+-+SP%2C+13202-590&output=embed"
           loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
+    </div>
+
+    <div class="info-box">
+      <span class="info-label">Informação importante</span>
+      <h3>👗 Dress Code</h3>
+      <p>Para a recepção, sugerimos o traje <strong>esporte fino</strong>.</p>
+      <p>Sugerimos as seguintes opções:</p>
+      <ul class="dress-list">
+        <li><strong>Vestidos:</strong> dê preferência aos comprimentos midi ou longo.</li>
+        <li><strong>Alfaiataria:</strong> calça social e camisa. Blazer é opcional, mas bem-vindo.</li>
+      </ul>
+      <p class="alert">⚠️ Para as mulheres, pedimos, com muito carinho, que as cores <strong>branco</strong>, <strong>off-white</strong> e <strong>bege claro</strong> sejam evitadas.</p>
     </div>
   </div>
 </section>
@@ -404,14 +470,18 @@
     <h3 id="modal-title">Obrigado! 💙</h3>
     <p class="modal-value" id="modal-value"></p>
     <img src="img/qrcode.jpeg" alt="QR Code Pix dos noivos">
-    <p>Escaneie o QR Code acima com o aplicativo do seu banco para fazer o Pix.<br>Muito obrigado pelo carinho!</p>
+    <p>Escaneie o QR Code acima com o aplicativo do seu banco para fazer o Pix.</p>
+    <p class="modal-zap">📲 Depois, envie o comprovante para o noivo pelo WhatsApp:<br>
+      <a href="https://wa.me/5519991943507" target="_blank" rel="noopener">(19) 99194-3507</a>
+    </p>
+    <p class="modal-bless">Muito obrigado pelo carinho!<br>Deus abençoe! 🙏</p>
   </div>
 </div>
 
 <footer>
   <div class="foot-names">Thales &amp; Beatriz</div>
   <div class="foot-date">29 · 05 · 2027 — JUNDIAÍ · SP</div>
-  <p class="foot-msg">"Acima de tudo, revistam-se do amor, que é o elo perfeito." — Colossenses 3:14</p>
+  <p class="foot-msg">"Acima de tudo, revistam-se do amor, que é o elo perfeito." — Colossenses 3,14</p>
 </footer>
 
 <script>
