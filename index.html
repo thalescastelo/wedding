@@ -282,6 +282,10 @@
     font-size:2rem;font-weight:700;color:var(--navy);margin-bottom:14px;
   }
   .gift-card .price small{font-size:1.05rem;font-weight:500}
+  .gift-card-custom .price-custom{
+    font-size:1.25rem;font-style:italic;font-weight:500;
+    color:var(--navy);margin-bottom:14px;
+  }
   .gift-btn{
     font-family:'Montserrat',sans-serif;
     font-size:10px;letter-spacing:2px;text-transform:uppercase;
@@ -359,14 +363,14 @@
   <img class="hero-logo" src="img/logo.jpeg" alt="Monograma Thales & Beatriz">
   <p class="hero-kicker">Vamos nos casar!</p>
   <h1>Thales &amp; Beatriz</h1>
-  <p class="hero-date">29 · 05 · 2027 — 11h</p>
+  <p class="hero-date">29 · 05 · 2027 — 10h30</p>
   <p class="hero-place">Paróquia Nossa Senhora da Conceição · Jundiaí, SP</p>
   <div class="hero-rule"><span>❦</span></div>
   <div class="countdown" id="countdown" aria-live="polite">
     <div class="count-box"><b id="cd-dias">–</b><span>Dias</span></div>
     <div class="count-box"><b id="cd-horas">–</b><span>Horas</span></div>
-    <div class="count-box"><b id="cd-min">–</b><span>Minutos</span></div>
-    <div class="count-box"><b id="cd-seg">–</b><span>Segundos</span></div>
+    <div class="count-box"><b id="cd-min">–</b><span>Min.</span></div>
+    <div class="count-box"><b id="cd-seg">–</b><span>Seg.</span></div>
   </div>
   <p class="hero-note"><b>Fique atento à confirmação de presença!</b><br>O Grupo Conti entrará em contato com você pelo WhatsApp.</p>
 </header>
@@ -397,13 +401,13 @@
   <div class="wrap">
     <p class="sec-kicker">Com a bênção de Deus</p>
     <h2 class="sec-title">Cerimônia Religiosa</h2>
-    <p class="sec-sub">Será uma imensa alegria celebrar nossa união com vocês! Nossa cerimônia incluirá a celebração da Santa Missa. Aos convidados católicos que desejarem comungar, lembramos fraternalmente a importância de estarem preparados para o momento mais especial, a Eucaristia.</p>
+    <p class="sec-sub">Com a bênção de Deus e de seus pais, Ronaldo e Claudia, Dilson e Sandra, será uma imensa alegria celebrar nossa união com vocês! Nossa cerimônia incluirá a celebração da Santa Missa. Aos convidados católicos que desejarem comungar, lembramos fraternalmente a importância de estarem preparados para o momento mais especial, a Eucaristia.</p>
     <div class="ceremony-grid">
       <div class="ceremony-card">
         <div style="font-size:1.8rem;color:var(--mustard)">⛪</div>
         <h3>Paróquia Nossa Senhora da Conceição</h3>
         <p class="addr">R. Gen. Carneiro, 106 — Vila Arens II<br>Jundiaí — SP, 13202-590</p>
-        <p class="hour">Sábado, 29 de maio de 2027 · 11h</p>
+        <p class="hour">Sábado, 29 de maio de 2027 · 10h30</p>
         <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia+Nossa+Senhora+da+Concei%C3%A7%C3%A3o%2C+R.+Gen.+Carneiro%2C+106+-+Vila+Arens+II%2C+Jundia%C3%AD+-+SP%2C+13202-590" target="_blank" rel="noopener">Como chegar</a>
       </div>
       <div class="map-frame">
@@ -472,7 +476,8 @@
     <img src="img/qrcode.jpeg" alt="QR Code Pix dos noivos">
     <p>Escaneie o QR Code acima com o aplicativo do seu banco para fazer o Pix.</p>
     <p class="modal-zap">📲 Depois, envie o comprovante para o noivo pelo WhatsApp:<br>
-      <a href="https://wa.me/5519991943507" target="_blank" rel="noopener">(19) 99194-3507</a>
+      <a href="https://wa.me/5519991943507" target="_blank" rel="noopener">(19) 99194-3507</a><br>
+      Queremos muito agradecer seu carinho!
     </p>
     <p class="modal-bless">Muito obrigado pelo carinho!<br>Deus abençoe! 🙏</p>
   </div>
@@ -486,7 +491,7 @@
 
 <script>
   // ---------- contagem regressiva ----------
-  const alvo = new Date("2027-05-29T11:00:00-03:00").getTime();
+  const alvo = new Date("2027-05-29T10:30:00-03:00").getTime();
   const pad = n => String(n).padStart(2, "0");
   function tick(){
     const diff = alvo - Date.now();
@@ -528,7 +533,7 @@
   ];
   const giftsEl = document.getElementById("gifts");
   let idx = 0;
-  for(let valor = 100; valor <= 800; valor += 50){
+  for(let valor = 150; valor <= 800; valor += 50){
     const [ico, nome] = nomes[idx++ % nomes.length];
     const card = document.createElement("div");
     card.className = "gift-card";
@@ -539,14 +544,23 @@
       <button class="gift-btn" data-valor="${valor}">Presentear</button>`;
     giftsEl.appendChild(card);
   }
+  const customCard = document.createElement("div");
+  customCard.className = "gift-card gift-card-custom";
+  customCard.innerHTML = `
+    <div class="gift-ico">🎁</div>
+    <h4>Outro valor</h4>
+    <div class="price-custom">Fique à vontade</div>
+    <button class="gift-btn" data-valor="">Presentear</button>`;
+  giftsEl.appendChild(customCard);
 
   // ---------- modal pix ----------
   const modal = document.getElementById("modal");
   giftsEl.addEventListener("click", e => {
     const btn = e.target.closest(".gift-btn");
     if(!btn) return;
-    document.getElementById("modal-value").textContent =
-      "Pix de R$ " + btn.dataset.valor + ",00";
+    document.getElementById("modal-value").textContent = btn.dataset.valor
+      ? "Pix de R$ " + btn.dataset.valor + ",00"
+      : "Pix no valor de sua escolha";
     modal.classList.add("open");
   });
   document.getElementById("modal-close").addEventListener("click", () => modal.classList.remove("open"));
