@@ -238,6 +238,9 @@
     .gallery figure{
       flex:0 0 78%;
       scroll-snap-align:center;
+      /* avança uma foto por gesto: impede que um toque mais forte
+         pule várias de uma vez */
+      scroll-snap-stop:always;
     }
     /* margens para o primeiro e o último slide também centralizarem */
     .gallery figure:first-child{margin-left:11%}
