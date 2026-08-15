@@ -216,6 +216,46 @@
   .gallery figure:nth-child(odd){transform:rotate(-1.2deg)}
   .gallery figure:nth-child(even){transform:rotate(1.2deg)}
 
+  /* pontinhos do carrossel — só aparecem no celular */
+  .gallery-dots{display:none}
+
+  /* ---------- galeria: carrossel deslizante no celular ---------- */
+  @media(max-width:700px){
+    .gallery{
+      display:flex;
+      position:relative;
+      gap:14px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      overscroll-behavior-x:contain;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      padding-bottom:6px;
+    }
+    .gallery::-webkit-scrollbar{display:none}
+    .gallery figure{
+      flex:0 0 78%;
+      scroll-snap-align:center;
+    }
+    /* anula a leve rotação: no carrossel as bordas ficariam tortas */
+    .gallery figure:nth-child(n){transform:none}
+    /* margens para o primeiro e o último slide também centralizarem */
+    .gallery figure:first-child{margin-left:11%}
+    .gallery figure:last-child{margin-right:11%}
+
+    .gallery-dots{
+      display:flex;justify-content:center;gap:7px;margin-top:18px;
+    }
+    .gallery-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:rgba(35,56,111,.22);
+      transition:background .3s ease,transform .3s ease;
+    }
+    .gallery-dot.active{
+      background:var(--navy);transform:scale(1.35);
+    }
+  }
+
   /* ---------- ceremony ---------- */
   .ceremony-grid{
     display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
@@ -322,6 +362,28 @@
     border:6px solid #fff;box-shadow:0 6px 20px rgba(35,56,111,.18);
   }
   .modal p{font-size:1.05rem;font-style:italic;color:#555}
+  .modal-copy-label{
+    margin-top:16px;margin-bottom:8px;
+    font-size:.95rem;font-style:italic;color:#555;
+  }
+  .pix-code-box{
+    display:flex;align-items:center;gap:8px;
+    background:#fff;border:1px solid rgba(35,56,111,.2);
+    border-radius:8px;padding:9px 10px;text-align:left;
+  }
+  .pix-code-box code{
+    flex:1;min-width:0;
+    font-family:'Courier New',monospace;font-size:.68rem;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .pix-copy-btn{
+    flex-shrink:0;font-family:'Montserrat',sans-serif;
+    font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+    background:var(--navy);color:#fff;border:none;border-radius:20px;
+    padding:9px 14px;cursor:pointer;transition:background .3s;
+  }
+  .pix-copy-btn:hover{background:var(--terracotta)}
+  .pix-copy-btn.copied{background:var(--olive)}
   .modal-zap{
     margin-top:14px;padding:12px 14px;
     background:rgba(109,122,46,.10);border-radius:8px;
@@ -392,6 +454,7 @@
       <figure><img src="img/foto7.jpg" alt="Thales e Beatriz — foto 7" loading="lazy"></figure>
       <figure><img src="img/foto8.jpg" alt="Thales e Beatriz — foto 8" loading="lazy"></figure>
     </div>
+    <div class="gallery-dots" id="gallery-dots" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -475,6 +538,11 @@
     <p class="modal-value" id="modal-value"></p>
     <img src="img/qrcode.jpeg" alt="QR Code Pix dos noivos">
     <p>Escaneie o QR Code acima com o aplicativo do seu banco para fazer o Pix.</p>
+    <p class="modal-copy-label">Ou copie o código Pix copia e cola:</p>
+    <div class="pix-code-box">
+      <code id="pix-code">00020126930014br.gov.bcb.pix0127bia.santana.silva@gmail.com0240Presente_de_Casamento!_Muito_Obrigada_s25204000053039865802BR5925BEATRIZ_SANTANA_DE_SIQUEI6015SAO_JOSE_DOS_CA62290525T4sCy6CC5frrgexg4wXI4RJHn6304AAAC</code>
+      <button type="button" id="pix-copy-btn" class="pix-copy-btn">Copiar código</button>
+    </div>
     <p class="modal-zap">📲 Depois, envie o comprovante para o noivo pelo WhatsApp:<br>
       <a href="https://wa.me/5519991943507" target="_blank" rel="noopener">(19) 99194-3507</a><br>
       Queremos muito agradecer seu carinho!
@@ -520,11 +588,11 @@
     ["🍝","Jantar mediterrâneo"],
     ["🏺","Cerâmica portuguesa"],
     ["🌊","Um dia na costa"],
-    ["💐","Buquê da noiva"],
+    ["⛵","Passeio de Veleiro"],
     ["🕊️","Bênção aos noivos"],
     ["🍽️","Jantar de lua de mel"],
-    ["🍰","Fatia do bolo"],
-    ["🎻","Música da cerimônia"],
+    ["🧀","Queijos e vinhos na Torre Eiffel"],
+    ["🎻","Noite de Música ao Luar"],
     ["✈️","Rumo à lua de mel"],
     ["🏛️","Sonho mediterrâneo"],
     ["👑","Presente dos reis"],
@@ -566,6 +634,72 @@
   document.getElementById("modal-close").addEventListener("click", () => modal.classList.remove("open"));
   modal.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("open"); });
   document.addEventListener("keydown", e => { if(e.key === "Escape") modal.classList.remove("open"); });
+
+  // ---------- pontinhos do carrossel da galeria (celular) ----------
+  const galeriaEl = document.querySelector(".gallery");
+  const dotsEl = document.getElementById("gallery-dots");
+  if(galeriaEl && dotsEl){
+    const figuras = [...galeriaEl.querySelectorAll("figure")];
+    figuras.forEach((_, i) => {
+      const d = document.createElement("span");
+      d.className = "gallery-dot" + (i === 0 ? " active" : "");
+      dotsEl.appendChild(d);
+    });
+    const dots = [...dotsEl.children];
+    // centros medidos uma vez (e a cada resize): durante o scroll só há aritmética
+    let centros = [];
+    const medir = () => {
+      centros = figuras.map(f => f.offsetLeft + f.offsetWidth / 2);
+    };
+    const atualizar = () => {
+      const centro = galeriaEl.scrollLeft + galeriaEl.clientWidth / 2;
+      let atual = 0, menorDist = Infinity;
+      centros.forEach((c, i) => {
+        const dist = Math.abs(c - centro);
+        if(dist < menorDist){ menorDist = dist; atual = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle("active", i === atual));
+    };
+    medir();
+    galeriaEl.addEventListener("scroll", atualizar, { passive: true });
+    window.addEventListener("resize", () => { medir(); atualizar(); });
+    window.addEventListener("load", () => { medir(); atualizar(); });
+  }
+
+  // ---------- copiar código pix ----------
+  const pixCopyBtn = document.getElementById("pix-copy-btn");
+  const pixCodeEl = document.getElementById("pix-code");
+  pixCopyBtn.addEventListener("click", async () => {
+    const texto = pixCodeEl.textContent.trim();
+    let copiado = false;
+    try {
+      if(navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(texto);
+        copiado = true;
+      }
+    } catch(err){ /* cai no fallback abaixo */ }
+    if(!copiado){
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = texto;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        ta.setSelectionRange(0, texto.length);
+        copiado = document.execCommand("copy");
+        document.body.removeChild(ta);
+      } catch(err){ copiado = false; }
+    }
+    const original = "Copiar código";
+    pixCopyBtn.textContent = copiado ? "Copiado!" : "Toque e segure para copiar";
+    pixCopyBtn.classList.toggle("copied", copiado);
+    setTimeout(() => {
+      pixCopyBtn.textContent = original;
+      pixCopyBtn.classList.remove("copied");
+    }, 2200);
+  });
 </script>
 </body>
 </html>
