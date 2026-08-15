@@ -413,6 +413,32 @@
   }
   .modal-close-bottom:hover{background:var(--navy);color:#fff}
 
+  /* ---------- botão de trilha sonora ---------- */
+  .music-toggle{
+    position:fixed;right:18px;bottom:18px;z-index:150;
+    width:48px;height:48px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--cream);color:var(--navy);
+    border:1px solid rgba(35,56,111,.28);
+    box-shadow:0 6px 18px rgba(35,56,111,.20);
+    font-size:20px;line-height:1;cursor:pointer;
+    transition:background .3s,color .3s,transform .2s;
+  }
+  .music-toggle:hover{transform:translateY(-2px)}
+  .music-toggle.playing{background:var(--navy);color:var(--cream)}
+  .music-toggle.playing::after{
+    content:"";position:absolute;inset:-5px;border-radius:50%;
+    border:1px solid rgba(35,56,111,.35);
+    animation:pulso 2s ease-out infinite;
+  }
+  @keyframes pulso{
+    0%{transform:scale(.9);opacity:.9}
+    100%{transform:scale(1.25);opacity:0}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .music-toggle.playing::after{animation:none}
+  }
+
   /* ---------- footer ---------- */
   footer{
     background:var(--navy-dark);color:rgba(250,245,234,.9);
@@ -569,6 +595,14 @@
   </div>
 </div>
 
+<!-- trilha sonora: o botão só aparece se um arquivo de áudio existir em audio/ -->
+<button type="button" class="music-toggle" id="music-toggle" hidden
+        aria-label="Tocar música" title="Tocar música">♪</button>
+<!-- data-inicio: segundo em que a música começa (troque aqui se quiser outro ponto) -->
+<audio id="music" preload="metadata" data-inicio="11">
+  <source src="audio/musica.mp3" type="audio/mpeg">
+</audio>
+
 <footer>
   <div class="foot-names">Thales &amp; Beatriz</div>
   <div class="foot-date">29 · 05 · 2027 — JUNDIAÍ · SP</div>
@@ -685,6 +719,45 @@
     galeriaEl.addEventListener("scroll", atualizar, { passive: true });
     window.addEventListener("resize", () => { medir(); atualizar(); });
     window.addEventListener("load", () => { medir(); atualizar(); });
+  }
+
+  // ---------- trilha sonora ----------
+  // Navegadores bloqueiam áudio automático: a música só toca com um toque.
+  const musica = document.getElementById("music");
+  const btnMusica = document.getElementById("music-toggle");
+  if(musica && btnMusica){
+    const inicio = parseFloat(musica.dataset.inicio) || 0;
+    // posiciona no ponto de início (ignora se a faixa for mais curta que isso)
+    const irParaInicio = () => {
+      if(inicio > 0 && musica.duration > inicio) musica.currentTime = inicio;
+    };
+    // o botão só aparece se algum arquivo em audio/ carregar de fato
+    musica.addEventListener("loadedmetadata", () => {
+      musica.volume = 0.45;
+      irParaInicio();
+      btnMusica.hidden = false;
+    });
+    musica.addEventListener("error", () => { btnMusica.hidden = true; });
+    // repete a partir do mesmo ponto (o atributo loop voltaria ao segundo 0)
+    musica.addEventListener("ended", () => {
+      irParaInicio();
+      musica.play().catch(() => {});
+    });
+    btnMusica.addEventListener("click", async () => {
+      if(musica.paused){
+        try {
+          await musica.play();
+          btnMusica.classList.add("playing");
+          btnMusica.setAttribute("aria-label", "Pausar música");
+          btnMusica.title = "Pausar música";
+        } catch(err){ /* o navegador recusou: mantém pausado */ }
+      } else {
+        musica.pause();
+        btnMusica.classList.remove("playing");
+        btnMusica.setAttribute("aria-label", "Tocar música");
+        btnMusica.title = "Tocar música";
+      }
+    });
   }
 
   // ---------- copiar código pix ----------
