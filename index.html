@@ -230,15 +230,15 @@
       overscroll-behavior-x:contain;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
-      padding-bottom:6px;
+      /* folga vertical para a inclinação das fotos e a sombra não serem
+         cortadas pelo overflow do carrossel */
+      padding:14px 0 28px;
     }
     .gallery::-webkit-scrollbar{display:none}
     .gallery figure{
       flex:0 0 78%;
       scroll-snap-align:center;
     }
-    /* anula a leve rotação: no carrossel as bordas ficariam tortas */
-    .gallery figure:nth-child(n){transform:none}
     /* margens para o primeiro e o último slide também centralizarem */
     .gallery figure:first-child{margin-left:11%}
     .gallery figure:last-child{margin-right:11%}
@@ -338,11 +338,18 @@
   /* ---------- pix modal ---------- */
   .modal-bg{
     position:fixed;inset:0;background:rgba(26,42,85,.72);
-    display:none;align-items:center;justify-content:center;
+    display:none;
     z-index:200;padding:20px;
+    /* permite rolar quando o conteúdo é mais alto que a tela do celular */
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
   }
   .modal-bg.open{display:flex}
   .modal{
+    /* margin:auto centraliza quando cabe e, quando não cabe, deixa o topo
+       acessível — ao contrário de align-items:center, que corta o topo */
+    margin:auto;
     background:var(--cream);border-radius:16px;
     max-width:400px;width:100%;text-align:center;
     padding:40px 32px 34px;position:relative;
@@ -395,6 +402,16 @@
   }
   .modal-zap a:hover{text-decoration:underline}
   .modal-bless{margin-top:14px;color:var(--navy) !important}
+  .modal-close-bottom{
+    margin-top:22px;
+    font-family:'Montserrat',sans-serif;
+    font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    background:transparent;color:var(--navy);
+    border:1px solid rgba(35,56,111,.35);
+    padding:12px 34px;border-radius:30px;cursor:pointer;
+    transition:background .3s,color .3s;
+  }
+  .modal-close-bottom:hover{background:var(--navy);color:#fff}
 
   /* ---------- footer ---------- */
   footer{
@@ -548,6 +565,7 @@
       Queremos muito agradecer seu carinho!
     </p>
     <p class="modal-bless">Muito obrigado pelo carinho!<br>Deus abençoe! 🙏</p>
+    <button type="button" class="modal-close-bottom" data-fechar>Fechar</button>
   </div>
 </div>
 
@@ -630,10 +648,13 @@
       ? "Pix de R$ " + btn.dataset.valor + ",00"
       : "Pix no valor de sua escolha";
     modal.classList.add("open");
+    modal.scrollTop = 0;   // sempre abre no topo, com o × à vista
   });
-  document.getElementById("modal-close").addEventListener("click", () => modal.classList.remove("open"));
-  modal.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("open"); });
-  document.addEventListener("keydown", e => { if(e.key === "Escape") modal.classList.remove("open"); });
+  const fecharModal = () => modal.classList.remove("open");
+  document.getElementById("modal-close").addEventListener("click", fecharModal);
+  modal.querySelector("[data-fechar]").addEventListener("click", fecharModal);
+  modal.addEventListener("click", e => { if(e.target === modal) fecharModal(); });
+  document.addEventListener("keydown", e => { if(e.key === "Escape") fecharModal(); });
 
   // ---------- pontinhos do carrossel da galeria (celular) ----------
   const galeriaEl = document.querySelector(".gallery");
